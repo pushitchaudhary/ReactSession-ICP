@@ -1,14 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Button from '../../component/Button'
-import Navbar from '../../component/Navbar'
+import Navbar from '../component/Navbar'
+import Button from '../component/Button'
 
 function Dashboard() {
   return (
     <>
-    {/* Navbar Ko design taane ko  */}
+    {/* Navbar */}
     <Navbar/>
 
+    {/* Hero Section */}
     <main class="dark:bg-gray-800 bg-white relative overflow-hidden h-screen">
         <div class="bg-white dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
             <div class="container mx-auto px-6 flex relative py-16">
@@ -25,11 +26,7 @@ function Dashboard() {
                         Dimension of reality that makes change possible and understandable. An indefinite and homogeneous environment in which natural events and human existence take place.
                     </p>
                     <div class="flex mt-8">
-                     
-                        <Button title={{name : 'Rabin'}}/>
-                        <a href="#" class="uppercase py-2 px-4 rounded-lg bg-transparent border-2 border-pink-500 text-pink-500 dark:text-white hover:bg-pink-500 hover:text-white text-md">
-                            Read more
-                        </a>
+                       <Button title={{name : 'Pushit', address : 'Pokhara'}}/>
                     </div>
                 </div>
                 <div class="hidden sm:block sm:w-1/3 lg:w-3/5 relative">
