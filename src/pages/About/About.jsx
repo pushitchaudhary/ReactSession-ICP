@@ -14,7 +14,6 @@ function About() {
     setNumber(number + 1)   
   }
 
-
   return (
     <> 
     <p>Value is : {number}</p>

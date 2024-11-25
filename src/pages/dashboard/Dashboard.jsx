@@ -1,43 +1,47 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Navbar from '../component/Navbar'
-import Button from '../component/Button'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Navbar from '../component/Navbar';
 
 function Dashboard() {
-  return (
-    <>
-    {/* Navbar */}
-    <Navbar/>
+    const [products, setProducts] = useState([]);
 
-    {/* Hero Section */}
-    <main class="dark:bg-gray-800 bg-white relative overflow-hidden h-screen">
-        <div class="bg-white dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
-            <div class="container mx-auto px-6 flex relative py-16">
-                <div class="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
-                    <span class="w-20 h-2 bg-gray-800 dark:bg-white mb-12">
-                    </span>
-                    <h1 class="font-bebas-neue uppercase text-6xl sm:text-8xl font-black flex flex-col leading-none dark:text-white text-gray-800">
-                        Be on
-                        <span class="text-5xl sm:text-7xl">
-                            Time
-                        </span>
-                    </h1>
-                    <p class="text-sm sm:text-base text-gray-700 dark:text-white">
-                        Dimension of reality that makes change possible and understandable. An indefinite and homogeneous environment in which natural events and human existence take place.
-                    </p>
-                    <div class="flex mt-8">
-                       <Button title={{name : 'Pushit', address : 'Pokhara'}}/>
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get('https://fakestoreapi.com/products');
+            console.log(response.data)
+            setProducts(response.data);
+        };
+
+        fetchData();
+    }, []);
+
+    return (
+        <>
+
+        <Navbar/>
+        <div className="flex flex-wrap justify-center border-2 w-full">
+            {products.map((product, index) => (
+                <div key={product.id}  className="mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
+                    <img className="h-48 w-full object-cover object-center" src={product.image} alt={product.title}/>
+                    <div className="p-4">
+                        <h2 className="mb-2 text-lg font-medium dark:text-white text-gray-900">
+                            {product.title}
+                        </h2>
+                        <p className="mb-2 text-base dark:text-gray-300 text-gray-700">
+                            {product.description}
+                        </p>
+                        <div className="flex items-center">
+                            <p className="mr-2 text-lg font-semibold text-gray-900 dark:text-white">
+                                ${product.price}
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="hidden sm:block sm:w-1/3 lg:w-3/5 relative">
-                    <img src="https://www.tailwind-kit.com/images/object/10.png" class="max-w-xs md:max-w-sm m-auto"/>
-                </div>
-            </div>
+            ))}
         </div>
-    </main>
+        </>
 
-    </>
-  )
+    );
 }
 
-export default Dashboard
+export default Dashboard;
